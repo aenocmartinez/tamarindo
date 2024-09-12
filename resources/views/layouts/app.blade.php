@@ -84,6 +84,13 @@
         .user-info span {
             cursor: pointer;
             margin-left: 1rem;
+            display: flex;
+            align-items: center;
+        }
+        /* Flecha solo para el nombre del usuario */
+        .user-info span .user-dropdown-icon {
+            margin-left: 0.5rem;
+            font-size: 0.75rem;
         }
         .dropdown-menu {
             display: none;
@@ -96,10 +103,11 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             width: 150px;
             z-index: 10;
+            font-size: 0.85rem;
         }
         .dropdown-menu a, .dropdown-menu form {
             display: block;
-            padding: 0.75rem;
+            padding: 0.5rem;
             text-align: left;
             color: black;
             text-decoration: none;
@@ -183,7 +191,7 @@
         .notification-extra-info {
             font-size: 0.65rem;
             text-align: right;
-            margin-left: auto; /* Alinear a la derecha */
+            margin-left: auto;
         }
         .notification-content {
             display: flex;
@@ -199,15 +207,15 @@
     <script>
         $(document).ready(function() {
             $('#notification-icon').click(function(event) {
-                event.stopPropagation(); // Evitar conflictos con otros eventos
-                $('#notification-popup').toggle(); // Mostrar el popup de notificaciones
-                $('#user-dropdown').hide(); // Asegurarse de que el dropdown de usuario esté oculto
+                event.stopPropagation();
+                $('#notification-popup').toggle();
+                $('#user-dropdown').hide();
             });
 
             $('#user-dropdown-trigger').click(function(event) {
-                event.stopPropagation(); // Evitar conflictos con otros eventos
-                $('#user-dropdown').toggle(); // Mostrar el dropdown de usuario
-                $('#notification-popup').hide(); // Asegurarse de que el popup de notificaciones esté oculto
+                event.stopPropagation();
+                $('#user-dropdown').toggle();
+                $('#notification-popup').hide();
             });
 
             $(document).click(function(event) {
@@ -226,20 +234,6 @@
 
             menu.classList.toggle('hidden');
             sidebarShowButton.classList.toggle('hidden');
-        }
-
-        function getTimeElapsed(notificationDate) {
-            const now = new Date();
-            const notificationTime = new Date(notificationDate);
-            const diffInMs = now - notificationTime;
-            const diffInHours = Math.floor(diffInMs / (1000 * 60 * 60));
-            
-            if (diffInHours < 24) {
-                return diffInHours + " horas";
-            } else {
-                const diffInDays = Math.floor(diffInHours / 24);
-                return diffInDays + " días";
-            }
         }
     </script>
 </head>
@@ -264,7 +258,7 @@
             <div id="notification-popup" class="notification-popup">
                 <ul>
                     <li class="unread-notification">
-                        <i data-feather="circle" class="notification-icon-status"></i>
+                        <i data-feather="circle" class="notification-icon-status"></i> <!-- Ícono de no leído -->
                         <div class="notification-content">
                             <div class="notification-details">
                                 <span class="notification-title">Nuevo mensaje</span>
@@ -274,7 +268,7 @@
                         </div>
                     </li>
                     <li class="read-notification">
-                        <i data-feather="check-circle" class="notification-icon-status"></i>
+                        <i data-feather="check-circle" class="notification-icon-status"></i> <!-- Ícono de leído -->
                         <div class="notification-content">
                             <div class="notification-details">
                                 <span class="notification-title">Recordatorio de suscripción</span>
@@ -284,7 +278,7 @@
                         </div>
                     </li>
                     <li class="read-notification">
-                        <i data-feather="check-circle" class="notification-icon-status"></i>
+                        <i data-feather="check-circle" class="notification-icon-status"></i> <!-- Ícono de leído -->
                         <div class="notification-content">
                             <div class="notification-details">
                                 <span class="notification-title">Actualización de la app</span>
@@ -296,8 +290,10 @@
                 </ul>
             </div>
 
-            <!-- Nombre del usuario en sesión -->
-            <span id="user-dropdown-trigger">{{ Auth::user()->name }}</span>
+            <!-- Nombre del usuario en sesión con flecha -->
+            <span id="user-dropdown-trigger">{{ Auth::user()->name }} 
+                <i data-feather="chevron-down" class="user-dropdown-icon" style="width: 14px; height: 14px;"></i> <!-- Flecha solo en el nombre del usuario -->
+            </span>
 
             <!-- Dropdown menú para perfil y logout -->
             <div id="user-dropdown" class="dropdown-menu">
