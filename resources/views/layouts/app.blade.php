@@ -38,10 +38,13 @@
         .header {
             background-color: #F97316;
             color: white;
-            padding: 1rem;
+            padding: 0.75rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
+        }
+        .header-logo {
+            font-size: 1.25rem;
         }
         .user-info {
             display: flex;
@@ -58,6 +61,8 @@
             margin-left: 0.5rem;
             font-size: 0.75rem;
         }
+
+        /* Dropdown mejorado */
         .dropdown-menu {
             display: none;
             position: absolute;
@@ -67,20 +72,85 @@
             color: black;
             border-radius: 0.375rem;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 150px;
+            width: 200px;
             z-index: 10;
-            font-size: 0.85rem;
+            font-size: 0.825rem;
         }
-        .dropdown-menu a, .dropdown-menu form {
-            display: block;
-            padding: 0.5rem;
+
+        .dropdown-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1rem;
+            background-color: #f8f8f8;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .dropdown-header i {
+            margin-bottom: 0.5rem;
+        }
+
+        .dropdown-header .font-normal {
+            font-size: 0.925rem;
+            color: #4a5568;
+        }
+
+        .dropdown-header .text-gray-500 {
+            color: #6b7280;
+            font-size: 0.75rem;
+        }
+
+        .dropdown-body {
+            padding: 0.5rem 0;
+        }
+
+        .dropdown-item {
+            display: flex;
+            align-items: center;
+            padding: 0.65rem 0.85rem;
             text-align: left;
-            color: black;
+            color: #4a5568;
             text-decoration: none;
+            font-size: 0.8rem;
         }
-        .dropdown-menu a:hover, .dropdown-menu form:hover {
+
+        .dropdown-item button {
+            background: none;
+            border: none;
+            display: flex;
+            align-items: center;
+            padding: 0;
+            margin: 0;
+            color: #4a5568;
+            font-size: inherit;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .dropdown-item:hover {
             background-color: #f0f0f0;
         }
+
+        .dropdown-icon {
+            margin-right: 0.65rem;
+            width: 14px;
+            height: 14px;
+            color: #4a5568;
+        }
+
+        .circular-avatar {
+            width: 48px;
+            height: 48px;
+            background-color: #f88a42;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 1.25rem;
+        }
+
+        /* Notificaciones */
         .notification-icon {
             position: relative;
             cursor: pointer;
@@ -96,10 +166,12 @@
             top: -6px;
             right: -6px;
         }
+
+        /* Popup de notificaciones */
         .notification-popup {
             display: none;
             position: absolute;
-            top: 60px;
+            top: 100%;
             right: 0;
             background-color: white;
             border-radius: 0.375rem;
@@ -200,7 +272,7 @@
     <!-- Header -->
     <header class="header">
         <!-- Logo o Nombre de la Aplicación -->
-        <div class="text-xl font-semibold">
+        <div class="header-logo">
             {{ config('app.name', 'Tamarindo') }}
         </div>
 
@@ -216,7 +288,7 @@
             <div id="notification-popup" class="notification-popup">
                 <ul>
                     <li class="unread-notification">
-                        <i data-feather="circle" class="notification-icon-status"></i> <!-- Ícono de no leído -->
+                        <i data-feather="circle" class="notification-icon-status"></i>
                         <div class="notification-content">
                             <div class="notification-details">
                                 <span class="notification-title">Nuevo mensaje</span>
@@ -226,7 +298,7 @@
                         </div>
                     </li>
                     <li class="read-notification">
-                        <i data-feather="check-circle" class="notification-icon-status"></i> <!-- Ícono de leído -->
+                        <i data-feather="check-circle" class="notification-icon-status"></i>
                         <div class="notification-content">
                             <div class="notification-details">
                                 <span class="notification-title">Recordatorio de suscripción</span>
@@ -236,7 +308,7 @@
                         </div>
                     </li>
                     <li class="read-notification">
-                        <i data-feather="check-circle" class="notification-icon-status"></i> <!-- Ícono de leído -->
+                        <i data-feather="check-circle" class="notification-icon-status"></i>
                         <div class="notification-content">
                             <div class="notification-details">
                                 <span class="notification-title">Actualización de la app</span>
@@ -248,19 +320,50 @@
                 </ul>
             </div>
 
-            <!-- Nombre del usuario en sesión con flecha -->
-            <span id="user-dropdown-trigger">{{ Auth::user()->name }} 
-                <i data-feather="chevron-down" class="user-dropdown-icon" style="width: 14px; height: 14px;"></i> <!-- Flecha solo en el nombre del usuario -->
-            </span>
+            <!-- Nombre del usuario con ícono y flecha -->
+            @if (Auth::check())
+                <span id="user-dropdown-trigger">
+                    <div class="circular-avatar">
+                        <i data-feather="user" style="width: 24px; height: 24px;"></i>
+                    </div>
+                    {{ Auth::user()->name }}
+                    <i data-feather="chevron-down" class="user-dropdown-icon" style="width: 14px; height: 14px;"></i>
+                </span>
 
-            <!-- Dropdown menú para perfil y logout -->
-            <div id="user-dropdown" class="dropdown-menu">
-                <a href="{{ route('profile.edit') }}">Perfil</a>
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-                    <button type="submit">Logout</button>
-                </form>
-            </div>
+                <!-- Dropdown menú para perfil, configuración, y cerrar sesión -->
+                <div id="user-dropdown" class="dropdown-menu">
+                    <div class="dropdown-header flex items-center px-4 py-3 bg-gray-100">
+                        <div class="circular-avatar">
+                            <i data-feather="user" style="width: 24px; height: 24px;"></i>
+                        </div>
+                        <div>
+                            <span class="font-normal">{{ Auth::user()->name }}</span>
+                            <div class="text-xs text-gray-500">{{ Auth::user()->role->name ?? 'Ejemplo de Rol' }}</div>
+                        </div>
+                    </div>
+                    <div class="dropdown-body">
+                        <a href="{{ route('profile.edit') }}" class="dropdown-item">
+                            <i data-feather="edit" class="dropdown-icon"></i>
+                            Perfil
+                        </a>
+                        <a href="#" class="dropdown-item">
+                            <i data-feather="settings" class="dropdown-icon"></i>
+                            Configuración
+                        </a>
+                        <a href="#" class="dropdown-item">
+                            <i data-feather="sliders" class="dropdown-icon"></i>
+                            Personalizar
+                        </a>
+                        <form method="POST" action="{{ route('logout') }}" class="dropdown-item">
+                            @csrf
+                            <button type="submit">
+                                <i data-feather="log-out" class="dropdown-icon"></i>
+                                Cerrar sesión
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            @endif
         </div>
     </header>
 
