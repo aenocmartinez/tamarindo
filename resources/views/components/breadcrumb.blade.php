@@ -1,7 +1,7 @@
 <div class="bg-white rounded-lg p-5 mb-3">
     <!-- Contenedor para el título y subtítulo -->
     <div class="mb-4">
-        <h1 class="text-3xl font-bold text-orange-600">
+        <h1 class="text-3xl font-bold text-orange-600 mb-3">
             {{ $sectionName }}
         </h1>
         @if($description)

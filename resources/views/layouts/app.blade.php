@@ -99,9 +99,9 @@
             <!-- Nombre del usuario con ícono y flecha -->
             @if (Auth::check())
                 <span id="user-dropdown-trigger">
-                    <div class="circular-avatar">
+                    <!-- <div class="circular-avatar">
                         <i data-feather="user" style="width: 18px; height: 18px;"></i>
-                    </div>
+                    </div> -->
                     {{ Auth::user()->name }}
                     <i data-feather="chevron-down" class="user-dropdown-icon" style="width: 14px; height: 14px;"></i>
                 </span>
@@ -150,24 +150,31 @@
                 <!-- Sidebar Menú estilo árbol -->
                 <nav>
                     <div class="mb-4">
-                        <button onclick="toggleSubmenu('dashboardSubmenu')" class="block py-2 px-3 hover:bg-gray-200 rounded-md w-full text-left text-sm flex items-center">
+                        <a href="#dashboard" 
+                        class="block py-2 px-3 rounded-md w-full text-left text-sm flex items-center 
+                                {{ request()->is('dashboard') ? 'bg-gray-200' : 'hover:bg-gray-200' }}">
                             <i data-feather="home" class="mr-2" style="width: 16px; height: 16px;"></i>Dashboard
-                        </button>
-                        <ul id="dashboardSubmenu" class="ml-6 mt-2 hidden">
-                            <li><a href="#" class="block py-1 px-3 hover:bg-gray-200 rounded-md text-sm">Vista General</a></li>
-                            <li><a href="#" class="block py-1 px-3 hover:bg-gray-200 rounded-md text-sm">Estadísticas</a></li>
-                        </ul>
+                        </a>
                     </div>
 
                     <div class="mb-4">
-                        <button onclick="toggleSubmenu('profileSubmenu')" class="block py-2 px-3 hover:bg-gray-200 rounded-md w-full text-left text-sm flex items-center">
-                            <i data-feather="settings" class="mr-2" style="width: 16px; height: 16px;"></i>Perfil
-                        </button>
-                        <ul id="profileSubmenu" class="ml-6 mt-2 hidden">
-                            <li><a href="{{ route('profile.edit') }}" class="block py-1 px-3 hover:bg-gray-200 rounded-md text-sm">Editar Perfil</a></li>
-                        </ul>
+                        <a href="{{ route('fields.index') }}" 
+                        class="block py-2 px-3 rounded-md w-full text-left text-sm flex items-center 
+                                {{ request()->routeIs('fields.index') ? 'bg-gray-200' : 'hover:bg-gray-200' }}">
+                            <i data-feather="grid" class="mr-2" style="width: 16px; height: 16px;"></i>Gestor de campos
+                        </a>
                     </div>
+
+                    <div class="mb-4">
+                        <a href="{{ route('collections.index') }}" 
+                        class="block py-2 px-3 rounded-md w-full text-left text-sm flex items-center 
+                                {{ request()->routeIs('collections.index') ? 'bg-gray-200' : 'hover:bg-gray-200' }}">
+                            <i data-feather="bookmark" class="mr-2" style="width: 16px; height: 16px;"></i>Gestor de colecciones
+                        </a>
+                    </div>
+                    
                 </nav>
+
             </div>
         </aside>
 
