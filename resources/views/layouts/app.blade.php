@@ -20,43 +20,10 @@
     <!-- Custom CSS -->
     <style>
         #sidebar {
-            transition: transform 0.3s ease, opacity 0.3s ease;
             width: 16rem;
             position: relative;
         }
-        #sidebar.hidden {
-            transform: translateX(-100%);
-            opacity: 0;
-        }
-        #sidebar-button {
-            position: absolute;
-            top: 50%;
-            right: -1.5rem;
-            transform: translateY(-50%);
-            background-color: #F97316;
-            color: white;
-            padding: 0.5rem;
-            border-radius: 0.375rem;
-            cursor: pointer;
-            transition: opacity 0.3s ease;
-        }
-        #sidebar-show-button {
-            position: fixed;
-            top: 50%;
-            left: 0;
-            transform: translateY(-50%);
-            background-color: #F97316;
-            color: white;
-            padding: 0.5rem;
-            border-radius: 0 0.375rem 0.375rem 0;
-            cursor: pointer;
-            display: none;
-        }
-        #sidebar.hidden + #sidebar-show-button {
-            display: block;
-        }
         #main-content {
-            transition: none;
             display: flex;
             flex-direction: column;
             padding-left: 0;
@@ -87,7 +54,6 @@
             display: flex;
             align-items: center;
         }
-        /* Flecha solo para el nombre del usuario */
         .user-info span .user-dropdown-icon {
             margin-left: 0.5rem;
             font-size: 0.75rem;
@@ -227,14 +193,6 @@
                 }
             });
         });
-
-        function toggleMenuVisibility() {
-            const menu = document.getElementById('sidebar');
-            const sidebarShowButton = document.getElementById('sidebar-show-button');
-
-            menu.classList.toggle('hidden');
-            sidebarShowButton.classList.toggle('hidden');
-        }
     </script>
 </head>
 <body class="min-h-screen bg-white flex flex-col">
@@ -307,14 +265,9 @@
     </header>
 
     <div class="flex flex-1">
-        <!-- Sidebar (siempre a la izquierda) -->
+        <!-- Sidebar (siempre visible a la izquierda) -->
         <aside id="sidebar" class="bg-gray-100 text-gray-700 flex-shrink-0 border-r border-gray-200">
             <div class="h-full py-8 px-4 space-y-6">
-                <!-- Botón para ocultar/mostrar menú alineado al borde derecho del menú -->
-                <div id="sidebar-button" onclick="toggleMenuVisibility()" style="right: 0; position: absolute; top: 50%; transform: translateY(-50%);">
-                    <i id="menu-toggle-icon" data-feather="chevron-left" style="width: 16px; height: 16px;"></i>
-                </div>
-
                 <!-- Sidebar Menú estilo árbol -->
                 <nav>
                     <div class="mb-4">
@@ -338,11 +291,6 @@
                 </nav>
             </div>
         </aside>
-
-        <!-- Botón flotante para mostrar el menú -->
-        <div id="sidebar-show-button" class="hidden" onclick="toggleMenuVisibility()">
-            <i data-feather="chevron-right" style="width: 16px; height: 16px;"></i>
-        </div>
 
         <!-- Main Content Area -->
         <main id="main-content" class="flex-1 bg-white">
