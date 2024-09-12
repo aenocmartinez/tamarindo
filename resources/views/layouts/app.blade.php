@@ -9,237 +9,13 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:400,600,700">
 
     <!-- Styles -->
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @vite(['resources/css/app.css', 'resources/css/custom.css', 'resources/js/app.js'])
 
     <!-- Feather Icons -->
     <script src="https://unpkg.com/feather-icons"></script>
 
     <!-- jQuery CDN -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-    <!-- Custom CSS -->
-    <style>
-        #sidebar {
-            width: 16rem;
-            position: relative;
-        }
-        #main-content {
-            display: flex;
-            flex-direction: column;
-            padding-left: 0;
-        }
-        .content-container {
-            width: 100%;
-            padding: 1rem;
-            box-sizing: border-box;
-        }
-
-        /* Estilos para el header, dropdown y notificaciones */
-        .header {
-            background-color: #F97316;
-            color: white;
-            padding: 0.75rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .header-logo {
-            font-size: 1.25rem;
-        }
-        .user-info {
-            display: flex;
-            align-items: center;
-            position: relative;
-        }
-        .user-info span {
-            cursor: pointer;
-            margin-left: 1rem;
-            display: flex;
-            align-items: center;
-        }
-        .user-info span .user-dropdown-icon {
-            margin-left: 0.5rem;
-            font-size: 0.75rem;
-        }
-
-        /* Dropdown mejorado */
-        .dropdown-menu {
-            display: none;
-            position: absolute;
-            top: 100%;
-            right: 0;
-            background-color: white;
-            color: black;
-            border-radius: 0.375rem;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 200px;
-            z-index: 10;
-            font-size: 0.825rem;
-        }
-
-        .dropdown-header {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 1rem;
-            background-color: #f8f8f8;
-            border-bottom: 1px solid #e5e7eb;
-        }
-
-        .dropdown-header i {
-            margin-bottom: 0.5rem;
-        }
-
-        .dropdown-header .font-normal {
-            font-size: 0.925rem;
-            color: #4a5568;
-        }
-
-        .dropdown-header .text-gray-500 {
-            color: #6b7280;
-            font-size: 0.75rem;
-        }
-
-        .dropdown-body {
-            padding: 0.5rem 0;
-        }
-
-        .dropdown-item {
-            display: flex;
-            align-items: center;
-            padding: 0.65rem 0.85rem;
-            text-align: left;
-            color: #4a5568;
-            text-decoration: none;
-            font-size: 0.8rem;
-        }
-
-        .dropdown-item button {
-            background: none;
-            border: none;
-            display: flex;
-            align-items: center;
-            padding: 0;
-            margin: 0;
-            color: #4a5568;
-            font-size: inherit;
-            cursor: pointer;
-            width: 100%;
-        }
-
-        .dropdown-item:hover {
-            background-color: #f0f0f0;
-        }
-
-        .dropdown-icon {
-            margin-right: 0.65rem;
-            width: 14px;
-            height: 14px;
-            color: #4a5568;
-        }
-
-        .circular-avatar {
-            width: 48px;
-            height: 48px;
-            background-color: #f88a42;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            font-size: 1.25rem;
-        }
-
-        /* Notificaciones */
-        .notification-icon {
-            position: relative;
-            cursor: pointer;
-            margin-right: 1rem;
-        }
-        .notification-count {
-            background-color: red;
-            color: white;
-            border-radius: 50%;
-            padding: 0.1rem 0.4rem;
-            font-size: 0.65rem;
-            position: absolute;
-            top: -6px;
-            right: -6px;
-        }
-
-        /* Popup de notificaciones */
-        .notification-popup {
-            display: none;
-            position: absolute;
-            top: 100%;
-            right: 0;
-            background-color: white;
-            border-radius: 0.375rem;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 300px;
-            z-index: 11;
-            padding: 1rem;
-            font-size: 0.75rem;
-        }
-        .notification-popup ul {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-        }
-        .notification-popup ul li {
-            padding: 0.75rem;
-            border-bottom: 1px solid #f0f0f0;
-            display: flex;
-            justify-content: space-between;
-        }
-        .notification-popup ul li:last-child {
-            border-bottom: none;
-        }
-        .notification-popup ul li:hover {
-            background-color: #f8f8f8;
-        }
-        .notification-title {
-            font-weight: normal;
-            text-align: left;
-            flex-grow: 1;
-        }
-        .notification-time {
-            font-size: 0.7rem;
-            color: gray;
-            margin-top: 0.2rem;
-            text-align: left;
-        }
-        .unread-notification {
-            color: #1f2937;
-        }
-        .read-notification {
-            color: #9ca3af;
-        }
-        .notification-icon-status {
-            margin-right: 0.5rem;
-            width: 14px;
-            height: 14px;
-        }
-        .unread-notification .notification-icon-status {
-            color: #F97316;
-        }
-        .read-notification .notification-icon-status {
-            color: #28a745;
-        }
-        .notification-extra-info {
-            font-size: 0.65rem;
-            text-align: right;
-            margin-left: auto;
-        }
-        .notification-content {
-            display: flex;
-            justify-content: space-between;
-            width: 100%;
-        }
-        .notification-details {
-            text-align: left;
-        }
-    </style>
 
     <!-- Custom JS con jQuery -->
     <script>
@@ -324,7 +100,7 @@
             @if (Auth::check())
                 <span id="user-dropdown-trigger">
                     <div class="circular-avatar">
-                        <i data-feather="user" style="width: 24px; height: 24px;"></i>
+                        <i data-feather="user" style="width: 18px; height: 18px;"></i>
                     </div>
                     {{ Auth::user()->name }}
                     <i data-feather="chevron-down" class="user-dropdown-icon" style="width: 14px; height: 14px;"></i>
@@ -337,8 +113,8 @@
                             <i data-feather="user" style="width: 24px; height: 24px;"></i>
                         </div>
                         <div>
-                            <span class="font-normal">{{ Auth::user()->name }}</span>
-                            <div class="text-xs text-gray-500">{{ Auth::user()->role->name ?? 'Ejemplo de Rol' }}</div>
+                            <span class="text-xs text-center">{{ Auth::user()->name }}</span>
+                            <div class="text-xs text-center text-gray-500">{{ Auth::user()->role->name ?? 'Administrador' }}</div>
                         </div>
                     </div>
                     <div class="dropdown-body">
