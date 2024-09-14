@@ -22,10 +22,10 @@ class SaveCollection extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|min:4|unique:collections,name,' . $this->route('collection')->id,
+            'name' => 'required|min:4|unique:collections,name,' . ($this->route('collection') ? $this->route('collection')->id : 'NULL'),
             'description' => 'nullable',
         ];
-    }
+    }    
     
 
     /**

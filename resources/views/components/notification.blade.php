@@ -17,7 +17,7 @@
     };
 @endphp
 
-<div x-data="{ open: true }" x-show="open" x-transition:enter="transition ease-out duration-500" x-transition:enter-start="opacity-0 transform translate-y-4" x-transition:enter-end="opacity-100 transform translate-y-0" x-transition:leave="transition ease-in duration-500" x-transition:leave-start="opacity-100 transform translate-y-0" x-transition:leave-end="opacity-0 transform translate-y-4" class="p-4 mb-4 rounded-lg {{ $typeClasses }}">
+<div x-data="{ open: true }" x-init="setTimeout(() => open = false, 5000)" x-show="open" x-transition:enter="transition ease-out duration-500" x-transition:enter-start="opacity-0 transform translate-y-4" x-transition:enter-end="opacity-100 transform translate-y-0" x-transition:leave="transition ease-in duration-500" x-transition:leave-start="opacity-100 transform translate-y-0" x-transition:leave-end="opacity-0 transform translate-y-4" class="p-4 mb-4 rounded-lg {{ $typeClasses }}">
     <div class="flex items-start">
         <div class="mr-3">
             {!! $icon !!}
