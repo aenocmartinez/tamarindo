@@ -50,7 +50,7 @@
                         <!-- Menú desplegable -->
                         <div id="dropdown-menu-{{ $collection->id }}" class="hidden absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-10 text-sm">
                             <a href="{{ route('collections.show', $collection->id) }}" class="block px-4 py-2 text-gray-600 hover:bg-gray-100 hover:text-gray-800 text-xs">
-                                Ver
+                                Más información
                             </a>
                             <a href="{{ route('collections.edit', $collection->id) }}" class="block px-4 py-2 text-gray-600 hover:bg-gray-100 hover:text-gray-800 text-xs">
                                 Editar

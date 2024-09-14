@@ -56,9 +56,9 @@ class CollectionController extends Controller
         }
     }
 
-    public function show($id) 
+    public function show(Collection $collection) 
     {
-
+        return view('collections.show', compact('collection'));
     }       
     
     public function destroy() {
