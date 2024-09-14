@@ -25,6 +25,13 @@ Route::middleware('auth')->group(function () {
 
     // Colecciones
     Route::get('/collections', [CollectionController::class, 'index'])->name('collections.index');
+    Route::get('/collections/create', [CollectionController::class, 'create'])->name('collections.create');
+    Route::post('/collections/store', [CollectionController::class, 'store'])->name('collections.store');
+    Route::get('/collections/{collection}/edit', [CollectionController::class, 'edit'])->name('collections.edit');
+    Route::put('/collections/{collection}', [CollectionController::class, 'update'])->name('collections.update');
+    Route::get('/collections/{id}/show', [CollectionController::class, 'show'])->name('collections.show');
+    Route::delete('/collections', [CollectionController::class, 'destroy'])->name('collections.destroy');
+
 
     // Gestor de campos
     Route::get('/fields', [FieldController::class, 'index'])->name('fields.index');    

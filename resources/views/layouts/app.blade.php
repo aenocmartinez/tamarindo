@@ -158,20 +158,20 @@
                     </div>
 
                     <div class="mb-4">
+                        <a href="{{ route('collections.index') }}" 
+                        class="block py-2 px-3 rounded-md w-full text-left text-sm flex items-center 
+                                {{ request()->routeIs('collections.index') ? 'bg-gray-200' : 'hover:bg-gray-200' }}">
+                            <i data-feather="bookmark" class="mr-2" style="width: 16px; height: 16px;"></i>Colecciones
+                        </a>
+                    </div>
+
+                    <div class="mb-4">
                         <a href="{{ route('fields.index') }}" 
                         class="block py-2 px-3 rounded-md w-full text-left text-sm flex items-center 
                                 {{ request()->routeIs('fields.index') ? 'bg-gray-200' : 'hover:bg-gray-200' }}">
                             <i data-feather="grid" class="mr-2" style="width: 16px; height: 16px;"></i>Gestor de campos
                         </a>
-                    </div>
-
-                    <div class="mb-4">
-                        <a href="{{ route('collections.index') }}" 
-                        class="block py-2 px-3 rounded-md w-full text-left text-sm flex items-center 
-                                {{ request()->routeIs('collections.index') ? 'bg-gray-200' : 'hover:bg-gray-200' }}">
-                            <i data-feather="bookmark" class="mr-2" style="width: 16px; height: 16px;"></i>Gestor de colecciones
-                        </a>
-                    </div>
+                    </div>                    
                     
                 </nav>
 
@@ -181,10 +181,30 @@
         <!-- Main Content Area -->
         <main id="main-content" class="flex-1 bg-white">
             <!-- Notificaciones/Alertas -->
-            @if(session('status'))
-                <div class="bg-orange-100 border border-orange-400 text-orange-700 px-4 py-2 rounded mb-4 text-sm" role="alert">
-                    {{ session('status') }}
-                </div>
+            @if(session('success'))
+                <x-notification
+                    type="success"
+                    title="¡Éxito!"
+                    message="{{ session('success') }}"
+                    dismissible="true"
+                    titleFontSize="text-xl"
+                    bodyFontSize="text-base"
+                    footerFontSize=""
+                    footer=""
+                />                
+            @endif
+
+            @if(session('error'))
+                <x-notification
+                    type="error"
+                    title="Error"
+                    message="{{ session('status') }}"
+                    dismissible="true"
+                    titleFontSize="text-xl"
+                    bodyFontSize="text-base"
+                    footerFontSize=""
+                    footer=""
+                />            
             @endif
 
             <!-- Content -->
