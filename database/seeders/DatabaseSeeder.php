@@ -13,7 +13,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $this->call(CollectionSeeder::class);
+        $this->call([
+            // CollectionSeeder::class,
+            FieldsTableSeeder::class
+        ]);
         // User::factory(10)->create();
 
         // User::factory()->create([

@@ -34,7 +34,16 @@ Route::middleware('auth')->group(function () {
 
 
     // Gestor de campos
-    Route::get('/fields', [FieldController::class, 'index'])->name('fields.index');    
+    Route::prefix('fields')->name('fields.')->group(function () {
+        Route::get('/', [FieldController::class, 'index'])->name('index');
+        Route::get('/create', [FieldController::class, 'create'])->name('create');
+        Route::post('/store', [FieldController::class, 'store'])->name('store');
+        Route::get('/{field}/edit', [FieldController::class, 'edit'])->name('edit');
+        Route::put('/{field}', [FieldController::class, 'update'])->name('update');
+        Route::delete('/{field}', [FieldController::class, 'destroy'])->name('destroy');
+        Route::get('/{field}/subfields', [FieldController::class, 'manageSubfields'])->name('subfields.manage');
+    });
+    
 });
 
 require __DIR__.'/auth.php';
