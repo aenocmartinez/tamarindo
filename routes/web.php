@@ -30,7 +30,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/collections/{collection}/edit', [CollectionController::class, 'edit'])->name('collections.edit');
     Route::put('/collections/{collection}', [CollectionController::class, 'update'])->name('collections.update');
     Route::get('/collections/{collection}/show', [CollectionController::class, 'show'])->name('collections.show');
-    Route::delete('/collections', [CollectionController::class, 'destroy'])->name('collections.destroy');
+    Route::delete('/collections/{collection}', [CollectionController::class, 'destroy'])->name('collections.destroy');
 
 
     // Gestor de campos

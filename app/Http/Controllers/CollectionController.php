@@ -56,12 +56,24 @@ class CollectionController extends Controller
         }
     }
 
-    public function show(Collection $collection) 
+    public function show(Collection $collection = null) 
     {
-        return view('collections.show', compact('collection'));
-    }       
+        if (!$collection) {
+            return redirect()->route('collections.index')
+                             ->with('error', 'La colección solicitada no existe.');
+        }
     
-    public function destroy() {
-        
+        return view('collections.show', compact('collection'));
     }
+        
+    public function destroy(Collection $collection) 
+    {
+        try {
+            $collection->delete();
+            return redirect()->route('collections.index')->with('success', 'La colección se ha eliminado correctamente.');
+        } catch (\Exception $e) {
+            return redirect()->route('collections.index')->with('error', 'Ocurrió un error al eliminar la colección.');
+        }
+    }
+    
 }
